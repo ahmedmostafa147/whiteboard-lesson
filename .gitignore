@@ -1,0 +1,5 @@
+.tts-cache/
+__pycache__/
+*.mp4
+previews/
+

@@ -1,0 +1,21 @@
+{
+  "title": "Present Simple — English Prep 1",
+  "voice": "en-US-AndrewNeural",
+  "scenes": [
+    {"layout": "title", "steps": [
+      {"say": "Hello everyone. Today we will learn the present simple tense.", "show": {"type": "heading", "text": "Present Simple", "dir": "ltr"}},
+      {"say": "English, first year preparatory.", "show": {"type": "text", "text": "English • Prep 1", "dir": "ltr"}}
+    ]},
+    {"steps": [
+      {"say": "We use the present simple for habits, and things that are always true.", "show": {"type": "heading", "text": "When do we use it?", "dir": "ltr"}},
+      {"say": "For example, habits: I drink milk every morning.", "show": {"type": "bullet", "text": "Habits: I drink milk every morning.", "dir": "ltr"}},
+      {"say": "And facts: The sun rises in the east.", "show": {"type": "bullet", "text": "Facts: The sun rises in the east.", "dir": "ltr", "dotColor": "green"}}
+    ]},
+    {"steps": [
+      {"say": "Here is the important rule. With he, she, and it, we add s to the verb.", "show": {"type": "heading", "text": "The golden rule", "dir": "ltr"}},
+      {"say": "I play, you play, we play, they play.", "show": {"type": "text", "text": "I / You / We / They  →  play", "dir": "ltr"}},
+      {"say": "But: he plays, she plays, it plays.", "show": {"type": "text", "text": "He / She / It  →  plays", "dir": "ltr", "color": "red"}},
+      {"say": "Remember: he, she, it, add s.", "show": {"type": "box", "label": "Remember", "text": "he / she / it  +  s", "color": "green", "dir": "ltr"}}
+    ]}
+  ]
+}

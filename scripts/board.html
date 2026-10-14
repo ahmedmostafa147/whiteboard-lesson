@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: "Messiri"; src: url("__FONTS__/ElMessiri.ttf"); font-weight: 400 700; }
+@font-face { font-family: "Tajawal"; src: url("__FONTS__/Tajawal-Medium.ttf"); font-weight: 500; }
+@font-face { font-family: "Tajawal"; src: url("__FONTS__/Tajawal-Bold.ttf"); font-weight: 700; }
+
+:root {
+  --ink: #23262b; --blue: #1d4ed8; --red: #c62828; --green: #15803d;
+  --orange: #d97706; --purple: #7e22ce; --board: #fcfcf9;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--board); }
+body { font-family: "Tajawal", sans-serif; color: var(--ink); position: relative; }
+
+#board {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 40%, #ffffff 0%, var(--board) 60%, #f1f1ec 100%);
+}
+#frame { position: absolute; inset: 22px; border: 3px solid #e4e4dc; border-radius: 18px; }
+
+.scene { position: absolute; inset: 0; padding: 96px 140px 120px; visibility: hidden; }
+.scene .content { transform-origin: top center; width: 100%; }
+.scene.layout-title .content { height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 36px; }
+.scene.layout-split .content { display: flex; gap: 70px; align-items: flex-start; }
+.scene.layout-split .col-text { flex: 1 1 56%; }
+.scene.layout-split .col-draw { flex: 1 1 44%; display: flex; flex-direction: column; gap: 30px; align-items: center; }
+
+.el { margin-bottom: 34px; position: relative; }
+.w { display: inline-block; }
+
+.heading { font-family: "Messiri", sans-serif; font-weight: 700; font-size: 74px; color: var(--blue); line-height: 1.35; display: inline-block; position: relative; }
+.layout-title .heading { font-size: 104px; }
+.heading-wrap { margin-bottom: 44px; }
+.layout-title .heading-wrap { margin-bottom: 0; }
+.heading .uline { position: absolute; right: -6px; bottom: -14px; width: calc(100% + 12px); height: 26px; overflow: visible; }
+
+.text { font-size: 50px; line-height: 1.65; font-weight: 500; }
+.layout-title .text { font-size: 52px; color: #555; }
+.bullet { font-size: 48px; line-height: 1.6; font-weight: 500; padding-right: 58px; }
+.bullet .dot { position: absolute; right: 6px; top: 0.62em; width: 22px; height: 22px; border-radius: 50%; border: 5px solid currentColor; }
+.bullet .dot.num { width: auto; height: auto; border: none; top: 0; font-family: "Messiri"; font-weight: 700; }
+
+[dir=ltr] { text-align: left; }
+.bullet[dir=ltr] { padding-right: 0; padding-left: 58px; }
+.bullet[dir=ltr] .dot { right: auto; left: 6px; }
+.heading-wrap[dir=ltr] .uline { right: auto; left: -6px; }
+.equation { font-family: "Tajawal", sans-serif; font-weight: 700; font-size: 70px; line-height: 1.5; text-align: center; padding: 6px 0; }
+.equation .w { vertical-align: middle; margin: 0 6px; }
+.frac { display: inline-flex !important; flex-direction: column; align-items: center; line-height: 1.05; font-size: 0.92em; }
+.frac .num { padding: 0 14px 6px; border-bottom: 6px solid currentColor; border-radius: 2px; }
+.frac .den { padding-top: 4px; }
+.equation.ltr { direction: ltr; }
+
+.box { font-size: 46px; line-height: 1.6; font-weight: 500; padding: 26px 38px 24px; }
+.box .boxsvg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.box .label { font-family: "Messiri"; font-weight: 700; display: block; font-size: 42px; margin-bottom: 4px; }
+.box .inner { position: relative; }
+
+.drawing { display: flex; justify-content: center; }
+.drawing svg { overflow: visible; direction: ltr; }
+.caption { font-size: 38px; color: #555; text-align: center; margin-top: 10px; }
+
+.c-ink { color: var(--ink); } .c-blue { color: var(--blue); } .c-red { color: var(--red); }
+.c-green { color: var(--green); } .c-orange { color: var(--orange); } .c-purple { color: var(--purple); }
+
+#pen { position: absolute; left: 0; top: 0; width: 120px; height: 120px; pointer-events: none; z-index: 50; display: none; }
+#eraser { position: absolute; width: 170px; height: 110px; z-index: 50; display: none; }
+
+#footer { position: absolute; left: 60px; right: 60px; bottom: 44px; height: 40px; display: flex; align-items: center; gap: 24px; font-size: 26px; color: #9a9a92; }
+#footer .title { white-space: nowrap; }
+#footer .track { flex: 1; height: 6px; border-radius: 3px; background: #ebebe4; overflow: hidden; direction: ltr; }
+#footer .bar { height: 100%; width: 0; background: #c9c9bf; }
+#watermark { position: absolute; left: 0; right: 0; bottom: 78px; text-align: center; direction: ltr; font-family: "Messiri", sans-serif; font-weight: 700; font-size: 30px; letter-spacing: 3px; color: #23262b; opacity: 0.32; }
+</style>
+</head>
+<body>
+<div id="board"><div id="frame"></div></div>
+<div id="scenes"></div>
+<div id="watermark"></div>
+<div id="footer"><span class="title"></span><div class="track"><div class="bar"></div></div></div>
+
+<svg id="pen" viewBox="0 0 120 120">
+  <!-- marker held at ~35deg; tip sits at (8,112) -->
+  <g transform="translate(8,112) rotate(-48)">
+    <rect x="18" y="-11" width="22" height="22" rx="3" fill="var(--pen,#1d4ed8)"/>
+    <rect x="40" y="-14" width="96" height="28" rx="6" fill="#f4f4f4" stroke="#bdbdbd" stroke-width="2"/>
+    <rect x="40" y="-14" width="30" height="28" rx="4" fill="var(--pen,#1d4ed8)"/>
+    <polygon points="0,0 18,-8 18,8" fill="var(--pen,#1d4ed8)"/>
+  </g>
+</svg>
+<svg id="eraser" viewBox="0 0 170 110">
+  <rect x="8" y="8" width="154" height="62" rx="10" fill="#3b3b3b"/>
+  <rect x="8" y="62" width="154" height="38" rx="6" fill="#e9e1cf" stroke="#cfc4aa" stroke-width="2"/>
+</svg>
+
+<script>window.LESSON = __LESSON__; window.TIMELINE = __TIMELINE__;</script>
+<script src="__SCRIPT__"></script>
+</body>
+</html>
