@@ -29,7 +29,7 @@ The pipeline: **you** write `lesson.json` (the teaching plan), `scripts/render.p
 
 ## Requirements
 
-Before the first render, check `python -c "import edge_tts, imageio_ffmpeg, playwright"`; if it fails, run `pip install edge-tts imageio-ffmpeg playwright` yourself. Uses the installed Microsoft Edge or Chrome (no extra browser download). Narration uses Microsoft's free neural voices over the internet (`ar-EG-ShakirNeural` male, `ar-EG-SalmaNeural` female).
+Before the first render, check `python -c "import edge_tts, imageio_ffmpeg, playwright, faster_whisper"`; if it fails, run `pip install edge-tts imageio-ffmpeg playwright faster-whisper` yourself. Uses the installed Microsoft Edge or Chrome (no extra browser download). Narration: if `GEMINI_API_KEY` is set (env or a `.env` file in the working folder), use Gemini voices (`"voice": "gemini:Charon"`); they sound far more natural. Otherwise fall back to Microsoft's free voices (`ar-EG-ShakirNeural`, `ar-EG-SalmaNeural`). Gemini makes one request per lesson, so the free tier covers about 10 videos a day.
 
 ## Quality bar
 

@@ -84,7 +84,7 @@ async def synth_one(text, voice, rate, out_mp3, sem):
         raise RuntimeError(f"TTS failed for: {text[:40]}... ({err})")
 
 
-def synthesize(texts, voice, rate):
+def synthesize(texts, voice, rate, style=None, lang="ar"):
     """Return {text: wav_path} for every narration line, using a local cache."""
     CACHE.mkdir(exist_ok=True)
     jobs, result = [], {}
@@ -99,10 +99,26 @@ def synthesize(texts, voice, rate):
         sem = asyncio.Semaphore(5)
         await asyncio.gather(*(synth_one(t, voice, rate, mp3, sem) for t, mp3, _ in jobs))
 
-    if jobs:
+    if jobs and voice.startswith("gemini:"):
+        # Google Gemini TTS (needs GEMINI_API_KEY in env or .env).
+        sys.path.insert(0, str(HERE))
+        import gemini_tts
+        print(f"  narration (Gemini): {len(jobs)} lines in one request ...", flush=True)
+        ordered = [t for t in texts if any(t == j[0] for j in jobs)]
+        ordered = list(dict.fromkeys(ordered))
+        paths = {t: mp3 for t, mp3, _ in jobs}
+        ff = ffmpeg_exe()
+        if not all(paths[t].exists() for t in ordered):  # a previous run may have split already
+            n_sil, n = gemini_tts.synth_batch(ordered, voice.split(":", 1)[1], [paths[t] for t in ordered],
+                                              style=style if style is not None else gemini_tts.STYLE,
+                                              ffmpeg=ff, lang=lang,
+                                              keep=CACHE / f"full_{tts_key(chr(10).join(ordered), voice, rate)}.wav")
+            print(f"    split into {n} lines", flush=True)
+    elif jobs:
         print(f"  narration: generating {len(jobs)} lines ...", flush=True)
         asyncio.run(run())
         ff = ffmpeg_exe()
+    if jobs:
         for _, mp3, wav in jobs:
             subprocess.run([ff, "-y", "-loglevel", "error", "-i", str(mp3), "-ar", str(RATE), "-ac", "1", str(wav)], check=True)
             mp3.unlink(missing_ok=True)
@@ -251,7 +267,7 @@ def main():
             timeline, _ = build_timeline(lesson, durations)
         else:
             print("[1/3] narration", flush=True)
-            wavs = synthesize(says, voice, rate)
+            wavs = synthesize(says, voice, rate, lesson.get("voice_style"), lesson.get("lang", "ar"))
             durations = {s: wav_seconds(w) for s, w in wavs.items()}
             timeline, clips = build_timeline(lesson, durations)
             mix_audio(clips, wavs, timeline["total"], tmp / "audio.wav")

@@ -18,7 +18,10 @@
 }
 ```
 
-- `title` is shown small in the footer. `voice` is optional (default Shakir, male). Use `ar-EG-SalmaNeural` for a female voice. For an English lesson, use `en-US-AndrewNeural` or `en-GB-SoniaNeural`.
+- `title` is shown small in the footer.
+- `voice`: `gemini:<Name>` for Gemini TTS (best quality; needs `GEMINI_API_KEY`). Arabic male: `Charon`, `Orus`; female: `Kore`, `Sulafat`; English: `Puck`. Without a key, use Microsoft voices: `ar-EG-ShakirNeural`, `ar-EG-SalmaNeural`, `en-US-AndrewNeural`.
+- `voice_style` (optional, Gemini only): how to speak, e.g. `"Read this like a warm, clear English teacher:"`. The default is a calm Egyptian teacher.
+- `lang`: `"en"` for English lessons (used to align the narration), default `"ar"`.
 - Every scene is one clean board. The previous board is wiped with an eraser before the next scene.
 - A **step** is one spoken sentence plus what gets written while it is said. `show` can be one element, a list (drawn one after another during that sentence), or missing (just talking). `pause` adds extra silence after the step, in seconds.
 - Writing speed adapts to the sentence length, so the pen finishes while the voice is still on that idea.

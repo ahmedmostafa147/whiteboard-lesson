@@ -9,7 +9,7 @@ Skill لـ Claude بتحوّل أي صفحة من كتاب مدرسي لـ **ف�
 - تقرا الصفحة (صورة أو PDF أو نص) وتكتب خطة شرح زي المدرس.
 - تكتب الكلام وترسم الأشكال على السبورة خطوة بخطوة، متزامنة مع الصوت.
 - كسور مكتوبة فوق بعض، ومعادلات بالعربي، ورسومات علمية، وشغالة بالعربي والإنجليزي.
-- صوت مصري طبيعي ببلاش: شاكر أو سلمى.
+- أصوات طبيعية جداً من Gemini (رجالي وحريمي، عربي وإنجليزي)، وتقدر توجّه طريقة الكلام. ولو مفيش مفتاح، بتشتغل بأصوات Microsoft المجانية.
 - الناتج فيديو MP4 بجودة 1080p.
 
 ## التسطيب
@@ -23,8 +23,18 @@ git clone https://github.com/ahmedmostafa147/whiteboard-lesson ~/.claude/skills/
 المكتبات بتتسطب لوحدها أول مرة. ولو حابب تسطّبها بنفسك:
 
 ```bash
-pip install edge-tts imageio-ffmpeg playwright
+pip install edge-tts imageio-ffmpeg playwright faster-whisper
 ```
+
+### صوت Gemini (اختياري، ومجاني)
+
+اعمل مفتاح من [Google AI Studio](https://aistudio.google.com/apikey) وحطه في ملف `.env` في الفولدر اللي شغال فيه:
+
+```
+GEMINI_API_KEY=your-key
+```
+
+كل فيديو بياخد طلب واحد بس، فالحساب المجاني بيكفي حوالي 10 فيديوهات في اليوم.
 
 ## الاستخدام
 
@@ -47,7 +57,7 @@ pip install edge-tts imageio-ffmpeg playwright
 ## How it works
 
 1. Claude reads the page and writes `lesson.json`, a teaching plan of scenes and steps. Each step is one spoken sentence plus what gets written or drawn during it ([format](references/lesson-format.md)).
-2. `scripts/render.py` generates the narration with Microsoft Edge neural TTS, times every pen stroke to the voice, renders each frame of an HTML/SVG whiteboard deterministically in a headless browser, and encodes the result with ffmpeg.
+2. `scripts/render.py` generates the narration (Gemini TTS in one request per lesson, split into sentences with Whisper alignment, or Microsoft Edge TTS without a key), times every pen stroke to the voice, renders each frame of an HTML/SVG whiteboard deterministically in a headless browser, and encodes the result with ffmpeg.
 
 ```bash
 python scripts/render.py examples/01-fractions.json --preview previews/   # one PNG per scene

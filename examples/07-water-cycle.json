@@ -1,23 +1,90 @@
 {
   "title": "دورة الماء في الطبيعة — علوم خامسة ابتدائي",
-  "voice": "ar-EG-SalmaNeural",
   "scenes": [
-    {"layout": "title", "steps": [
-      {"say": "عمرك سألت نفسك المطر بييجي منين؟ في الدرس ده هنعرف دورة الماء في الطبيعة.", "show": {"type": "heading", "text": "دورة الماء في الطبيعة"}},
-      {"say": "علوم، الصف الخامس الابتدائي.", "show": {"type": "text", "text": "علوم • الصف الخامس الابتدائي"}}
-    ]},
-    {"layout": "split", "steps": [
-      {"say": "بصوا على الرسمة دي. عندنا بحر، وشمس، وسحاب.", "show": [
-        {"type": "heading", "text": "مراحل الدورة"},
-        {"type": "drawing", "height": 520, "svg": "<svg viewBox='0 0 500 460'><circle cx='420' cy='70' r='42' fill='#fde68a' stroke='#d97706' stroke-width='6'/><path d='M0 400 Q 60 380 120 400 T 240 400 T 360 400 T 500 400 L500 460 L0 460 Z' fill='#93c5fd' stroke='#1d4ed8' stroke-width='6'/><path d='M60 120 C 40 120, 40 80, 70 80 C 75 50, 120 45, 135 70 C 160 55, 195 75, 185 100 C 205 110, 195 135, 175 130 L70 130 C 55 130, 50 122, 60 120 Z' fill='#e5e7eb' stroke='#475569' stroke-width='6'/><path d='M300 370 C 300 300, 310 230, 280 170' fill='none' stroke='#c62828' stroke-width='6' stroke-dasharray='0'/><polyline points='268,190 280,168 296,186' fill='none' stroke='#c62828' stroke-width='6'/><path d='M250 140 L205 110' stroke='#475569' stroke-width='6' fill='none'/><polyline points='222,104 203,109 214,126' fill='none' stroke='#475569' stroke-width='6'/><line x1='90' y1='160' x2='80' y2='200' stroke='#1d4ed8' stroke-width='6' stroke-linecap='round'/><line x1='125' y1='160' x2='115' y2='200' stroke='#1d4ed8' stroke-width='6' stroke-linecap='round'/><line x1='160' y1='160' x2='150' y2='200' stroke='#1d4ed8' stroke-width='6' stroke-linecap='round'/><text x='315' y='280' font-family='Tajawal' font-size='32' fill='#c62828'>تبخر</text><text x='262' y='150' font-family='Tajawal' font-size='32' fill='#475569'>تكثف</text><text x='120' y='250' font-family='Tajawal' font-size='30' text-anchor='middle' fill='#1d4ed8'>مطر</text></svg>"}
-      ]},
-      {"say": "أولاً التبخر: الشمس بتسخن مية البحر، فتتحول لبخار يطلع لفوق.", "show": {"type": "bullet", "text": "التبخر: الماء ← بخار", "marker": "١", "color": "red"}},
-      {"say": "تانياً التكثف: البخار لما يطلع فوق يبرد، ويتجمع على شكل سحاب.", "show": {"type": "bullet", "text": "التكثف: البخار ← سحاب", "marker": "٢"}},
-      {"say": "تالتاً الهطول: السحاب لما يتقل، المية تنزل مطر، وترجع للبحر تاني.", "show": {"type": "bullet", "text": "الهطول: سحاب ← مطر", "marker": "٣", "color": "blue"}}
-    ]},
-    {"steps": [
-      {"say": "وعلشان كده بنسميها دورة، لأنها بتتكرر على طول من غير ما تخلص.", "show": {"type": "heading", "text": "ليه اسمها دورة؟"}},
-      {"say": "نفس المية بتلف الرحلة دي ملايين المرات.", "show": {"type": "box", "label": "معلومة", "text": "كمية الماء على الأرض ثابتة، وهي تتنقل فقط بين البحر والسماء", "color": "green"}}
-    ]}
-  ]
+    {
+      "layout": "title",
+      "steps": [
+        {
+          "say": "عمرك سألت نفسك المطر بييجي منين؟ في الدرس ده هنعرف دورة الماء في الطبيعة.",
+          "show": {
+            "type": "heading",
+            "text": "دورة الماء في الطبيعة"
+          }
+        },
+        {
+          "say": "علوم، الصف الخامس الابتدائي.",
+          "show": {
+            "type": "text",
+            "text": "علوم • الصف الخامس الابتدائي"
+          }
+        }
+      ]
+    },
+    {
+      "layout": "split",
+      "steps": [
+        {
+          "say": "بصوا على الرسمة دي. عندنا بحر، وشمس، وسحاب.",
+          "show": [
+            {
+              "type": "heading",
+              "text": "مراحل الدورة"
+            },
+            {
+              "type": "drawing",
+              "height": 520,
+              "svg": "<svg viewBox='0 0 500 460'><circle cx='420' cy='70' r='42' fill='#fde68a' stroke='#d97706' stroke-width='6'/><path d='M0 400 Q 60 380 120 400 T 240 400 T 360 400 T 500 400 L500 460 L0 460 Z' fill='#93c5fd' stroke='#1d4ed8' stroke-width='6'/><path d='M60 120 C 40 120, 40 80, 70 80 C 75 50, 120 45, 135 70 C 160 55, 195 75, 185 100 C 205 110, 195 135, 175 130 L70 130 C 55 130, 50 122, 60 120 Z' fill='#e5e7eb' stroke='#475569' stroke-width='6'/><path d='M300 370 C 300 300, 310 230, 280 170' fill='none' stroke='#c62828' stroke-width='6' stroke-dasharray='0'/><polyline points='268,190 280,168 296,186' fill='none' stroke='#c62828' stroke-width='6'/><path d='M250 140 L205 110' stroke='#475569' stroke-width='6' fill='none'/><polyline points='222,104 203,109 214,126' fill='none' stroke='#475569' stroke-width='6'/><line x1='90' y1='160' x2='80' y2='200' stroke='#1d4ed8' stroke-width='6' stroke-linecap='round'/><line x1='125' y1='160' x2='115' y2='200' stroke='#1d4ed8' stroke-width='6' stroke-linecap='round'/><line x1='160' y1='160' x2='150' y2='200' stroke='#1d4ed8' stroke-width='6' stroke-linecap='round'/><text x='315' y='280' font-family='Tajawal' font-size='32' fill='#c62828'>تبخر</text><text x='262' y='150' font-family='Tajawal' font-size='32' fill='#475569'>تكثف</text><text x='120' y='250' font-family='Tajawal' font-size='30' text-anchor='middle' fill='#1d4ed8'>مطر</text></svg>"
+            }
+          ]
+        },
+        {
+          "say": "أولاً التبخر: الشمس بتسخن مية البحر، فتتحول لبخار يطلع لفوق.",
+          "show": {
+            "type": "bullet",
+            "text": "التبخر: الماء ← بخار",
+            "marker": "١",
+            "color": "red"
+          }
+        },
+        {
+          "say": "تانياً التكثف: البخار لما يطلع فوق يبرد، ويتجمع على شكل سحاب.",
+          "show": {
+            "type": "bullet",
+            "text": "التكثف: البخار ← سحاب",
+            "marker": "٢"
+          }
+        },
+        {
+          "say": "تالتاً الهطول: السحاب لما يتقل، المية تنزل مطر، وترجع للبحر تاني.",
+          "show": {
+            "type": "bullet",
+            "text": "الهطول: سحاب ← مطر",
+            "marker": "٣",
+            "color": "blue"
+          }
+        }
+      ]
+    },
+    {
+      "steps": [
+        {
+          "say": "وعلشان كده بنسميها دورة، لأنها بتتكرر على طول من غير ما تخلص.",
+          "show": {
+            "type": "heading",
+            "text": "ليه اسمها دورة؟"
+          }
+        },
+        {
+          "say": "نفس المية بتلف الرحلة دي ملايين المرات.",
+          "show": {
+            "type": "box",
+            "label": "معلومة",
+            "text": "كمية الماء على الأرض ثابتة، وهي تتنقل فقط بين البحر والسماء",
+            "color": "green"
+          }
+        }
+      ]
+    }
+  ],
+  "voice": "gemini:Kore"
 }
